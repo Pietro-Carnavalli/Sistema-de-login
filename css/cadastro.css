@@ -27,26 +27,13 @@ footer {
 
 #key,#codigo, #senha{
     border-radius: 5px;
-    border-color: black;
-    border-style: solid;
-    width: 70%;
+    width: 100%;
+    border: 2px solid black;
+    
 }
 
 #nome,#sobrenome{
     border-radius: 5px;
-    border-color: black;
-    border-style: solid;
+    border: 2px solid black;
     
 }
-
-#sideSide{
-    gap: 8%;
-    margin-left: 13%;
-
-}
-
-nav{
-    text-align: center;
-}
-
-
