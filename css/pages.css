@@ -26,12 +26,17 @@ footer {
     color: white;
 }
 
-#key{
+#email,#codigo{
     border-radius: 5px;
     width: 70%;
     border: 2px solid black;
-    
+
 }
+
+#codigo{
+    display: none;
+}
+
 
 
 
