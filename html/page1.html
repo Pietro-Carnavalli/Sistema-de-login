@@ -41,11 +41,11 @@
                     <input type="text" placeholder="E-mail*" id="email">
                 </div>
                 <div>
-                    <input type="password" class="mt-4" type="text" placeholder="Senha*" id="senha">
-                    <p id="aviso">A senha deve conter 8 caracteres</p>
+                    <input type="password" class="mt-4 d-none" placeholder="Senha*" id="senha">
+                    <p class="d-none" id="aviso">A senha deve conter 8 caracteres</p>
                 </div>
             </form>
-            <button type="button" onclick="validarEmail()" class="button mb-3"> Login </button>
+            <button id="validacao" type="button" onclick="validarEmail()" class="button mb-3"> Login </button>
 
 
         </nav>

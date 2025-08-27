@@ -20,17 +20,27 @@ function validarEmail() {
 //Abre senha na tela//
 function acesso(valor) {
     let campoSenha = document.getElementById("senha");
+    let aviso = document.getElementById("aviso")
 
     if (valor === true) {
-        campoSenha.classList.remove("none");
+        campoSenha.classList.remove("d-none");
+        aviso.classList.remove("d-none")
+
+        let validacao = document.getElementById("validacao");
+        validacao.onclick = validarSenha;
     } else {
-        campoSenha.classList.add("none");
+        campoSenha.classList.add("d-none");
+        aviso.classList.add("d-none")
+
+        validacao.onclick = validarEmail;
     }
 }
 
 //Validacao de senha//
 function validarSenha() {
-    let senha = document.getElementById('senha').value;
+    let senhaInput = document.getElementById('senha')
+    let senha = senhaInput.value
+
     if (senha.length >= 8) {
         return alert("Cadastro concluido")
     }
