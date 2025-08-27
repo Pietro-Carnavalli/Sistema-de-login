@@ -2,7 +2,16 @@ body {
     font-family: sans-serif;
     
 }
+#aviso{
+ font-size: 75%;
+ display: none;
+ 
+}
 
+p{
+    font-size: 120%;
+    
+}
 footer {
     position: absolute;
     width: 100%;
@@ -26,14 +35,14 @@ footer {
     color: white;
 }
 
-#email,#codigo{
+#email,#senha{
     border-radius: 5px;
     width: 70%;
     border: 2px solid black;
 
 }
 
-#codigo{
+#senha{
     display: none;
 }
 
