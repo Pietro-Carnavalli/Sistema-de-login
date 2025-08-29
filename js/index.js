@@ -1,3 +1,15 @@
+//Save users//
+let users = []
+
+
+function NewUser(email, senha) {
+    this.email = email;
+    this.senha = senha;
+
+}
+
+
+
 //validacao de email//
 function validarEmail() {
 
@@ -9,7 +21,7 @@ function validarEmail() {
         console.log("Resposta armazenada", emailDigitado);
         return acesso(true);
 
-    } else {
+    } else  {
         console.log("Email invalido");
         return acesso(false);
 
@@ -36,16 +48,32 @@ function acesso(valor) {
     }
 }
 
-//Validacao de senha//
+//Validacao de senha e save do usuario//
 function validarSenha() {
     let senhaInput = document.getElementById('senha')
     let senha = senhaInput.value
+    let senhaEmail = document.getElementById('email')
+    let email = senhaEmail.value
 
     if (senha.length >= 8) {
+        let novo = new NewUser(email, senha)
+        let novoUsuario = novo
+        const string = JSON.stringify(novoUsuario);
+
+        users.push(novoUsuario)
+      
+        sessionStorage.setItem("users", JSON.stringify(users))
+
+        console.log(users)
+
+
         return alert("Cadastro concluido")
+
     }
     else {
+
         return alert("A senha deve conter 8 caracteres")
+
     }
 
 }
@@ -54,9 +82,5 @@ function validarSenha() {
 
 
 
-//Save users//
-let users = []
-
-sessionStorage.setItem("users", JSON.stringify(users))
 
 //window.location.href='/html/cadastro.html'//
