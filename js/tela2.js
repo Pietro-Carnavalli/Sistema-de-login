@@ -1,5 +1,17 @@
-//Save users//
 let users = []
+
+function verify() {
+    const cadastrado = users.some(u => u.email === document.getElementById("email").value)
+    if (cadastrado) {
+
+        console.log("Usuario ja cadastrado")
+        return true
+    } else {
+        console.log("Usuario nao cadastrado")
+        return false
+    }
+
+}
 
 
 function NewUser(email, senha) {
@@ -7,8 +19,6 @@ function NewUser(email, senha) {
     this.senha = senha;
 
 }
-
-
 
 //validacao de email//
 function validarEmail() {
@@ -21,7 +31,7 @@ function validarEmail() {
         console.log("Resposta armazenada", emailDigitado);
         return acesso(true);
 
-    } else  {
+    } else {
         console.log("Email invalido");
         return acesso(false);
 
@@ -33,13 +43,13 @@ function validarEmail() {
 function acesso(valor) {
     let campoSenha = document.getElementById("senha");
     let aviso = document.getElementById("aviso")
+    let validacao = document.getElementById("validacao");
 
     if (valor === true) {
         campoSenha.classList.remove("d-none");
         aviso.classList.remove("d-none")
+        validacao.onclick = cadastrarUsuario;
 
-        let validacao = document.getElementById("validacao");
-        validacao.onclick = validarSenha;
     } else {
         campoSenha.classList.add("d-none");
         aviso.classList.add("d-none")
@@ -48,34 +58,38 @@ function acesso(valor) {
     }
 }
 
-//Validacao de senha e save do usuario//
-function validarSenha() {
-    let senhaInput = document.getElementById('senha')
-    let senha = senhaInput.value
-    let senhaEmail = document.getElementById('email')
-    let email = senhaEmail.value
-
+// Função para validar senha
+function validarSenha(senha) {
     if (senha.length >= 8) {
-        let novo = new NewUser(email, senha)
-        let novoUsuario = novo
-        const string = JSON.stringify(novoUsuario);
-
-        users.push(novoUsuario)
-      
-        sessionStorage.setItem("users", JSON.stringify(users))
-
-        console.log(users)
-
-
-        return alert("Cadastro concluido")
-
+        return true
+    } else {
+        alert("A senha deve conter no mínimo 8 caracteres");
+        return false;
     }
-    else {
+}
 
-        return alert("A senha deve conter 8 caracteres")
 
+function cadastrarUsuario() {
+    let senhaInput = document.getElementById('senha');
+    let senha = senhaInput.value;
+    let emailInput = document.getElementById('email');
+    let email = emailInput.value;
+
+    if (!validarSenha(senha)) {
+        return; 
     }
 
+    else if (verify()) {
+        return;
+    }
+    
+    let novo = new NewUser(email, senha);
+    users.push(novo);
+
+    sessionStorage.setItem("users", JSON.stringify(users));
+
+    console.log(users);
+    alert("Cadastro concluído!");
 }
 
 
