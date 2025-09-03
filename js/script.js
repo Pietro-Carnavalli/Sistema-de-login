@@ -1,17 +1,9 @@
 //Save users//
-let users = []
+let users = JSON.parse(localStorage.getItem("users")) || [];
 
-function verify() {
-    const cadastrado = users.some(u => u.email === document.getElementById("email").value)
-    if (cadastrado) {
-
-        console.log("Usuario ja cadastrado")
-        return true
-    } else {
-        console.log("Usuario nao cadastrado")
-        return false
-    }
-
+function verify(email) {
+    return users.some(user => user.email === email);
+   
 }
 
 
@@ -28,16 +20,7 @@ function validarEmail() {
     let posArroba = emailDigitado.indexOf("@");
     let posPonto = emailDigitado.lastIndexOf(".");
 
-    if (posArroba > 0 && posPonto > posArroba + 1 && posPonto < emailDigitado.length - 1) {
-        console.log("Resposta armazenada", emailDigitado);
-        return acesso(true);
-
-    } else {
-        console.log("Email invalido");
-        return acesso(false);
-
-    }
-
+    return posArroba > 0 && posPonto > posArroba + 1 && posPonto < emailDigitado.length - 1;
 }
 
 //Abre senha na tela//
@@ -69,25 +52,34 @@ function validarSenha(senha) {
     }
 }
 
+// Chamada pela interface para validar e-mail
+function verificarEmail() {
+    let email = document.getElementById("email").value;
+
+    if (validarEmail(email)) {
+        console.log("Email válido:", email);
+        acesso(true);
+    } else {
+        console.log("Email inválido");
+        acesso(false);
+    }
+}
 
 function cadastrarUsuario() {
-    let senhaInput = document.getElementById('senha');
-    let senha = senhaInput.value;
-    let emailInput = document.getElementById('email');
-    let email = emailInput.value;
+    let senha= document.getElementById('senha').value;
+    let email = document.getElementById('email').value;
+   
 
-    if (!validarSenha(senha)) {
-        return; 
-    }
-
-    else if (verify()) {
+    if (!validarSenha(senha)) return; 
+    if(verify(email)){
+        alert("Usuário já cadastrado");
         return;
     }
-    
+
     let novo = new NewUser(email, senha);
     users.push(novo);
 
-    sessionStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("users", JSON.stringify(users));
 
     console.log(users);
     alert("Cadastro concluído!");
