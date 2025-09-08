@@ -1,20 +1,22 @@
+// Lista de usuários armazenados no localStorage
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
-function verify(email) {
-    return users.some(user => user.email === email);
-   
-}
 
-
+// ------------------- CONSTRUTOR -------------------
 function NewUser(email, senha) {
     this.email = email;
     this.senha = senha;
-
 }
 
-//validacao de email//
-function validarEmail() {
 
+// Salva usuários no localStorage
+function saveUsers() {
+    localStorage.setItem("users", JSON.stringify(users));
+}
+
+// ------------------- VALIDAÇÕES -------------------
+// Validação de e-mail
+function validarEmail() {
     let emailDigitado = document.getElementById("email").value;
     let posArroba = emailDigitado.indexOf("@");
     let posPonto = emailDigitado.lastIndexOf(".");
@@ -22,17 +24,27 @@ function validarEmail() {
     return posArroba > 0 && posPonto > posArroba + 1 && posPonto < emailDigitado.length - 1;
 }
 
-// Função para validar senha
+
+// Validação de senha
 function validarSenha(senha) {
-    if (senha.length >= 8) {
-        return true
+    let confSenha = document.getElementById("confSenha").value;
+
+    if (senha.length >= 8 === confSenha.length >= 8) {
+        return true;
     } else {
         alert("A senha deve conter no mínimo 8 caracteres");
         return false;
     }
 }
 
-// Chamada pela interface para validar e-mail
+// ------------------- VERIFICAÇÕES -------------------
+
+// Verifica se o usuário já existe
+function verify(email) {
+    return users.some(user => user.email === email);
+}
+
+// Verifica e-mail digitado
 function verificarEmail() {
     let email = document.getElementById("email").value;
 
@@ -45,13 +57,13 @@ function verificarEmail() {
     }
 }
 
+// ------------------- CADASTRO -------------------
 function cadastrarUsuario() {
-    let senha= document.getElementById('senha').value;
-    let email = document.getElementById('email').value;
-   
+    let senha = document.getElementById("senha").value;
+    let email = document.getElementById("email").value;
 
-    if (!validarSenha(senha)) return; 
-    if(verify(email)){
+    if (!validarSenha(senha)) return;
+    if (verify(email)) {
         alert("Usuário já cadastrado");
         return;
     }
@@ -65,9 +77,9 @@ function cadastrarUsuario() {
     alert("Cadastro concluído!");
 }
 
-
-
-
-
-
-//window.location.href='/html/cadastro.html'//
+// ------------------- EVENTOS -------------------
+const button = document.getElementById("btnVerif");
+button.addEventListener("click", function (event) {
+    event.preventDefault();
+    cadastrarUsuario();
+});

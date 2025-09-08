@@ -25,9 +25,11 @@ footer {
     color: white;
 }
 
-#key,#codigo, #senha,#email{
+#key,#codigo, #confSenha,#senha,#email{
     border-radius: 5px;
     width: 100%;
     border: 2px solid black;
     
 }
+
+
